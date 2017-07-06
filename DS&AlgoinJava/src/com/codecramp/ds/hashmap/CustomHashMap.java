@@ -77,6 +77,17 @@ public class CustomHashMap<K, V> {
   public int findBucket(K key) {
     return key.hashCode() % buckets.length;
   }
+  
+  public void printMap() {
+    for(int i=0; i< buckets.length; i++) {
+      Entry<K, V> current = buckets[i];
+      while (current != null) {
+        System.out.print(current);
+        current = current.next;
+      }
+      System.out.println();
+    }
+  }
 }
 
 
