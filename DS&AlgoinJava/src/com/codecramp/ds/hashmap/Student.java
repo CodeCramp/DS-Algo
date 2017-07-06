@@ -23,10 +23,13 @@ public class Student {
     this.rollNumber = rollNumber;
   }
   
-
   @Override
   public int hashCode() {
-    return 1;
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((name == null) ? 0 : name.hashCode());
+    result = prime * result + rollNumber;
+    return result;
   }
 
   @Override
