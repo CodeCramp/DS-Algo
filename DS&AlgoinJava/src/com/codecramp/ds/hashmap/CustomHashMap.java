@@ -16,7 +16,11 @@ public class CustomHashMap<K, V> {
       while (currentEntry != null) {
         if (currentEntry.key.equals(key)) { // Same key found -- Overwrite it.
           entryToAdd.next = currentEntry.next; // Ensure that the old links are intact
-          previous.next = entryToAdd;  // Overwrite
+          if(previous == null) { // The very first item in the bucket is duplicate
+            currentEntry = entryToAdd;
+          } else {
+            previous.next = entryToAdd;  // Overwrite somewhere in the middle
+          }
           return;
         }
         previous = currentEntry;
@@ -75,7 +79,7 @@ public class CustomHashMap<K, V> {
    * @return the location of the bucket.
    */
   public int findBucket(K key) {
-    return key.hashCode() % buckets.length;
+    return Math.abs(key.hashCode()) % buckets.length;
   }
   
   public void printMap() {
